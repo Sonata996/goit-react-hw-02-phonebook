@@ -1,24 +1,25 @@
-import { InputFilter } from "components/InputFilter/InputFilter"
+import {ContactList,ElemList,DeletButton } from "./contacts.styled"
 
 
-export const ContactsList = ({contact,title,tilteInput,onAddFilter}) =>{
+export const ContactsList = ({contact,onClickDelet}) =>{
     return(
         <div>
-            <h2>{title}</h2>
-            
-            <InputFilter 
-            title={tilteInput}
-            onAddFilter={onAddFilter}
-            />
-
-            <ul> 
-               {contact.map(elem => <li key={elem.id}>
+            <ContactList> 
+               {contact.map(elem => <ElemList key={elem.id}>
                 <p>
                     {elem.name}: {elem.number}
                 </p>
-               </li>
+                <DeletButton
+                    id={elem.id}
+
+                onClick={(elem)=>{
+                    onClickDelet(elem.target.id)
+                }}
+                >
+                    Delete</DeletButton>
+               </ElemList>
                 )}
-            </ul>
+            </ContactList>
         </div>
     )
 }

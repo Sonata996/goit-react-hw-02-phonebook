@@ -1,7 +1,7 @@
 import {ContactList,ElemList,DeletButton } from "./contacts.styled"
 
 
-export const ContactsList = ({contact,onClickDelet}) =>{
+export const Contacts = ({contact,onClickDelet}) =>{
     return(
         <div>
             <ContactList> 

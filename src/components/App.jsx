@@ -1,7 +1,7 @@
 import { Component } from "react"
 import { nanoid } from 'nanoid'
-import { FormPhonebookName } from "./InputName/InputName";
-import { ContactsList } from "./Contacts/Contacts";
+import { InputName } from "./InputName/InputName";
+import { Contacts } from "./Contacts/Contacts";
 import { InputFilter } from "./InputFilter/InputFilter";
 
 export class App extends Component{
@@ -16,8 +16,8 @@ state ={
 }
 
 addName = ({name,number}) =>{
- const similarityContact = this.state.contacts.filter(elem =>  elem.name.toLowerCase().trim() === name.toLowerCase().trim())
-
+ const similarityContact = this.state.contacts.filter(elem =>  elem.name.toLowerCase() === name.toLowerCase())
+ 
   if (similarityContact.length === 0) {
     this.setState(prevState => ({
       contacts: [...prevState.contacts, {name,number, id: nanoid()}]
@@ -39,16 +39,10 @@ this.setState({
 searchContacts = () => {
  return this.state.contacts.filter(elem => {
     const filters = this.state.filter.toLowerCase()
-    const searchContact = elem.name.toLowerCase().includes(filters)
-
-   if (!searchContact) {
-    return searchContact
-  } 
-  return this.state.contacts
+    return  elem.name.toLowerCase().includes(filters)
+      }
+  )
 }
-)
-}
-
 
 deletContact =(idContact) =>{
   this.state.contacts.filter(elem => {
@@ -66,7 +60,7 @@ deletContact =(idContact) =>{
     <div>
       <h1>Phonebook</h1>
 
-      <FormPhonebookName 
+      <InputName 
       onCangeName={this.addName}
       />
 
@@ -77,7 +71,7 @@ deletContact =(idContact) =>{
       onAddFilter={this.addFilter}
       /> 
 
-      <ContactsList 
+      <Contacts 
       onClickDelet={this.deletContact}
       contact={visibleItems}
       
